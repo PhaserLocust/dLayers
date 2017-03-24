@@ -29,10 +29,12 @@ $(document).ready(function () {
         if (name === '') {
             $('button').prop('disabled', true);
             $("#controls").addClass("disabled");
+            $("hr").addClass("disabled");
             return;
         }
         $('button').prop('disabled', false);
         $("#controls").removeClass("disabled");
+        $("hr").removeClass("disabled");
     }
     
     //////////////////////////////////

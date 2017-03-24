@@ -50,11 +50,20 @@ by the settings of the CC application
     background: rgba(63, 64, 65, .3);
 }
 
+hr.disabled {
+    opacity: 30%;
+}
+
 div {
     display: inline-block;
 }
 
-button {
+.topcoat-button--quiet {
+    line-height: 0;
+}
+
+
+button.tall {
     width: 100%;
     height: 40px;
     padding:0 !important;
@@ -62,13 +71,33 @@ button {
     text-align: center;
 }
 
-img {
+button.short {
+    width: 100%;
+    height: 17px;
+    padding:0 !important;
+    display: inline-block;
+    text-align: center;
+    font-size: 10px;
+}
+
+button.short.vert {
+    vertical-align: unset;
+}
+
+img.square {
     padding-top: 4px;
 }
 
+img.layerset {
+    margin-right: 3px;
+    margin-bottom: 1px;
+    vertical-align: middle;
+}
+
 .third {
-    width: 31%;
-    margin-bottom: 3px;
+    float: left;
+    height: 17px;
+    margin-bottom: 0px;
     display: inline-block;
     text-align: center;
 }
@@ -81,7 +110,8 @@ img {
 }
 
 .fifth {
-    width: 18.8%;
+    float: left;
+    width: 20%;
     margin-bottom: 3px;
     display: inline-block;
     text-align: center;
