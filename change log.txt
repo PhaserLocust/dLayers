@@ -1,0 +1,11 @@
+////////////////////////////////
+//    |) Layers Change Log    //
+////////////////////////////////
+
+04/??/17 v1.1.0
+    + Create Layers added
+    +
+
+03/29/17 v1.0.0
+    - Initial release
+    - Remove Sublayers only

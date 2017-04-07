@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="5.0" ExtensionBundleId="com.rps.dlayers" ExtensionBundleVersion="1.0.0"
+<ExtensionManifest Version="5.0" ExtensionBundleId="com.rps.dlayers" ExtensionBundleVersion="1.1.0"
 		ExtensionBundleName="|) Layers" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
 		<Extension Id="com.rps.dlayers" Version="1.0" />
@@ -35,10 +35,10 @@
 						</Size>
                         <MinSize>
                             <Height>58</Height>
-                            <Width>240</Width>
+                            <Width>88</Width>
                         </MinSize>
                         <MaxSize>
-                            <Height>58</Height>
+                            <Height>900</Height>
                             <Width>512</Width>
                         </MaxSize>
 					</Geometry>

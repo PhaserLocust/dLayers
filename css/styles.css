@@ -8,7 +8,9 @@
     margin-right:auto;
     margin-left:auto;
     vertical-align:middle;
+    text-align: center;
     width:100%;
+    height:100%;
 }
 
 button:focus {
@@ -95,8 +97,9 @@ img.layerset {
 }
 
 .third {
-    float: left;
-    height: 17px;
+    /*float: left;
+    height: 17px;*/
+    width: 75px;
     margin-bottom: 0px;
     display: inline-block;
     text-align: center;
