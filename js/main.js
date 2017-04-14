@@ -22,10 +22,9 @@ $(document).ready(function () {
     
     function onDocDeactivated(event) {
     }
-        
-    function onDocActivated(event) {
-        //disable if doc not open
-        var name = $(event.data).find("name").text();
+    
+    function setEnabled(name) {
+        // disables ui if passed ''
         if (name === '') {
             $('button').prop('disabled', true);
             $("#controls").addClass("disabled");
@@ -35,6 +34,24 @@ $(document).ready(function () {
         $('button').prop('disabled', false);
         $("#controls").removeClass("disabled");
         $("hr").removeClass("disabled");
+    }
+
+    function onDocActivated(event) {
+        var name;
+        if (event === '') {
+            csInterface.evalScript('docIsOpen()', function (res) {
+                console.log("the result: " + res);
+                if (res === 'true') {
+                    setEnabled('enable');
+                } else {
+                    setEnabled('');
+                }
+            });
+            return;
+        } else {
+            name = $(event.data).find("name").text();
+            setEnabled(name);
+        }
     }
     
     //////////////////////////////////
@@ -76,10 +93,8 @@ $(document).ready(function () {
     //listen for ai document save
     //csInterface.addEventListener("documentAfterSave", onDocSaved);
     
-    /*
-    
-    csInterface.evalScript('docURL()');
-    
-    */
-    
+    $(window).load(function () {
+        console.log(Date() + ' window loaded');
+        onDocActivated('');
+    });
 });

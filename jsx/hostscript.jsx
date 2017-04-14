@@ -1,6 +1,11 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global $, Folder*/
 
+// returns bool
+function docIsOpen() {
+    return app.documents.length > 0 ? 'true' : 'false';
+}
+
 function remLayers(layer) {
     layer.locked = false;
     var layerCount = layer.layers.length;

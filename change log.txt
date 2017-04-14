@@ -4,7 +4,8 @@
 
 04/??/17 v1.1.0
     + Create Layers added
-    +
+    + UI updated
+    - Fixed extension being disabled if Illustrator opened with file
 
 03/29/17 v1.0.0
     - Initial release
