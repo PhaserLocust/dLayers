@@ -54,12 +54,48 @@ $(document).ready(function () {
         }
     }
     
+    function setOn(sel) {
+        $('.' + sel + '"').css("background-color", "#626465");
+    }
+    
+    function setOff(sel) {
+        $('.' + sel + '"').css("background-color", "transparent");
+    }
+    
     //////////////////////////////////
     
     $('#remSublayers').click(function () {
         console.log(Date() + ' remSublayers');
         csInterface.evalScript('removeSublayers()');
     });
+    
+    $('.topcoat-button', '#layersets').hover(
+        function () {
+            var theId = '.' + this.id;
+            $(theId).css("box-shadow", "0 21px 0 0 #626465 inset");
+        },
+        function () {
+            var theId = '.' + this.id;
+            $(theId).css("box-shadow", "none");
+        }
+    );
+    
+    $('.topcoat-button', '#layersets').click(
+        function () {
+            var theId = '.' + this.id;
+            csInterface.evalScript('addLayers()');
+        }
+    );
+    
+    $('.topcoat-button--quiet', '#rectBtns').click(
+        function () {
+            console.log('clicked it! ' + this.id);
+            csInterface.evalScript('addLayer("' + this.id + '")');
+        }
+    );
+    
+    
+    
     
     $('#deny').click(function () {
         closeNotifier('confirmation');

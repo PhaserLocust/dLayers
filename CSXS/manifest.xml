@@ -35,10 +35,10 @@
 						</Size>
                         <MinSize>
                             <Height>58</Height>
-                            <Width>88</Width>
+                            <Width>80</Width>
                         </MinSize>
                         <MaxSize>
-                            <Height>900</Height>
+                            <Height>540</Height>
                             <Width>512</Width>
                         </MaxSize>
 					</Geometry>

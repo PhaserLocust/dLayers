@@ -1,7 +1,7 @@
 /*Your styles*/
 
  body {
-    margin: 4px 6px 6px 6px;
+    margin: 2px;
 }
 
 #content {
@@ -11,6 +11,15 @@
     text-align: center;
     width:100%;
     height:100%;
+}
+
+.squareBtns {
+    line-height: 34px !important;
+    word-spacing: -2px;
+}
+
+#rectBtns {
+    word-spacing: -2px;
 }
 
 button:focus {
@@ -37,57 +46,13 @@ by the settings of the CC application
 /*background color and font*/
 .hostElt{}
 
-#controls {
-    width: 100%;
-    margin: auto;
-    padding: 5px 5px 2px 5px;
-    text-align: center;
-    overflow: auto;
-    height:50px;
-    box-sizing: border-box;
-    background: rgba(63, 64, 65, 1);
-}
-
-#controls.disabled {
-    background: rgba(63, 64, 65, .3);
-}
-
-hr.disabled {
-    opacity: 30%;
-}
-
-div {
-    display: inline-block;
-}
-
-.topcoat-button--quiet {
-    line-height: 0;
-}
-
-
-button.tall {
-    width: 100%;
-    height: 40px;
-    padding:0 !important;
+button {
+    height: 32px;
+    width: 32px;
+    padding: 0 !important;
     display: inline-block;
     text-align: center;
-}
-
-button.short {
-    width: 100%;
-    height: 17px;
-    padding:0 !important;
-    display: inline-block;
-    text-align: center;
-    font-size: 10px;
-}
-
-button.short.vert {
-    vertical-align: unset;
-}
-
-img.square {
-    padding-top: 4px;
+    font-size: 10px !important;
 }
 
 img.layerset {
@@ -96,13 +61,18 @@ img.layerset {
     vertical-align: middle;
 }
 
+.ital {
+    font-style: italic;
+}
+
 .third {
-    /*float: left;
-    height: 17px;*/
-    width: 75px;
-    margin-bottom: 0px;
-    display: inline-block;
-    text-align: center;
+    width: 76px;
+    height: 18px;
+    line-height: 12px !important;
+}
+
+.third.adj {
+    line-height: 14px !important;
 }
 
 .fourth {
@@ -113,11 +83,7 @@ img.layerset {
 }
 
 .fifth {
-    float: left;
-    width: 20%;
-    margin-bottom: 3px;
-    display: inline-block;
-    text-align: center;
+    width: 48px;
 }
 
 pre {
