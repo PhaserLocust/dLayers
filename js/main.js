@@ -83,19 +83,15 @@ $(document).ready(function () {
     $('.topcoat-button', '#layersets').click(
         function () {
             var theId = '.' + this.id;
-            csInterface.evalScript('addLayers()');
+            csInterface.evalScript('addLayers("' + this.id + '", true)');
         }
     );
     
     $('.topcoat-button--quiet', '#rectBtns').click(
         function () {
-            console.log('clicked it! ' + this.id);
-            csInterface.evalScript('addLayer("' + this.id + '")');
+            csInterface.evalScript('addLayers("' + this.id + '", false)');
         }
     );
-    
-    
-    
     
     $('#deny').click(function () {
         closeNotifier('confirmation');

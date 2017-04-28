@@ -1,32 +1,52 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global $, Folder, app, ElementPlacement*/
+'use strict';
 
 // ll(layerList) object contains objects describing layers to be created
 // key name corresponds to button id in html, index is array with desired layer order
 var ll = {
-    index: ['notes', 'mask', 'pdTarget', 'info', 'die', 'dieInfo', 'whitePlate', 'mattePlate', 'cameraMarks', 'cutterGuide', 'slit', 'jobFinishing', 'finishing', 'hiddenArt', 'fpoBarcode', 'barcode', 'salesSample', 'whiteBacking', 'fill', 'substrate'],
-    notes: {index: 0, name: 'Notes', print: false},
-    mask: {index: 1, name: 'Mask for Page:', print: true},
-    pdTarget: {index: 2, name: 'PD Target', print: true},
-    info: {index: 3, name: 'Info', print: true},
-    die: {index: 4, name: 'Die', print: true},
-    dieInfo: {index: 5, name: 'Die Info', print: true},
-    whitePlate: {index: 6, name: 'White Plate', print: true},
-    mattePlate: {index: 7, name: 'Matte Plate', print: true},
-    cameraMarks: {index: 8, name: 'Camera Marks', print: true},
-    cutterGuide: {index: 9, name: 'Cutter Guide', print: true},
-    slit: {index: 10, name: 'Slit', print: true},
-    jobFinishing: {index: 11, name: 'Job Finishing Marks', print: true},
-    finishing: {index: 12, name: 'Finishing Marks', print: true},
-    hiddenArt: {index: 13, name: 'Hidden Art', print: false},
-    fpoBarcode: {index: 14, name: 'FPO Barcode', print: false},
-    barcode: {index: 15, name: 'Barcode', print: true, placement: 'below'},
-    salesSample: {index: 16, name: 'Sales Sample', print: true, placement: 'below'},
-    whiteBacking: {index: 17, name: 'White Backing', print: true, placement: 'above', pos: ElementPlacement.PLACEATEND},
-    fill: {index: 18, name: 'Fill', print: true, placement: 'above', pos: ElementPlacement.PLACEATEND},
-    substrate: {index: 19, name: 'Substrate', print: true, pos: ElementPlacement.PLACEATEND}
+    index: ['notes', 'mask', 'pdTarget', 'info', 'die', 'dieInfo', 'slit', 'whitePlate', 'mattePlate', 'cameraMarks', 'cutterGuide', 'finishing', 'jobFinishing', 'fill', 'hiddenArt', 'fpoBarcode', 'barcode', 'salesSample', 'whiteBacking', 'substrate', 'custom'],
+    notes: {index: 0, name: 'Notes', print: false, pos: ElementPlacement.PLACEATBEGINNING},
+    mask: {index: 1, name: 'Mask for Page:', post: [0], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    pdTarget: {index: 2, name: 'PD Target', post: [], pre: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    info: {index: 3, name: 'Info', print: true, post: [], pre: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
+    die: {index: 4, name: 'Die', print: true, post: [], pre: [5, 6, 7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
+    dieInfo: {index: 5, name: 'Die Info', print: true, post: [], pre: [6, 7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
+    slit: {index: 6, name: 'Slit', print: true, post: [], pre: [7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
+    whitePlate: {index: 7, name: 'White Plate', post: [], pre: [8, 9, 10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    mattePlate: {index: 8, name: 'Matte Plate', post: [], pre: [9, 10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    cameraMarks: {index: 9, name: 'Camera Marks', post: [], pre: [10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    cutterGuide: {index: 10, name: 'Cutter Guide', post: [], pre: [11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    finishing: {index: 11, name: 'Finishing Marks', post: [], pre: [12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    jobFinishing: {index: 12, name: 'Job Finishing Marks', post: [], pre: [13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    fill: {index: 13, name: 'Fill', print: true,  post: [], pos: ElementPlacement.PLACEATBEGINNING},
+    hiddenArt: {index: 14, name: 'Hidden Art', post: [], pre: [15, 16, 17], print: false},
+    fpoBarcode: {index: 15, name: 'FPO Barcode',  post: [14], pre: [16, 17], print: false},
+    barcode: {index: 16, name: 'Barcode',  post: [15, 14], pre: [17], print: true},
+    salesSample: {index: 17, name: 'Sales Sample',  post: [16, 15, 14], print: true},
+    whiteBacking: {index: 18, name: 'White Backing', pre: [19], print: true, pos: ElementPlacement.PLACEATEND},
+    substrate: {index: 19, name: 'Substrate', print: true,  post: [18], pos: ElementPlacement.PLACEATEND},
+    custom: {index: 20, name: '', print: true},
+    shortName: function (ind) {return this[this.index[ind]].name; },
+    fullName: function (ind, add) {
+        if (add !== '') {
+            return this[this.index[ind]].name + add + ' - CL&D Digital';
+        } else {
+            return this[this.index[ind]].name + ' - CL&D Digital';
+        }
+    }
 };
-var suffix = ' - CL&D Digital';
+
+var sets = {
+    basic: ['notes', 'pdTarget', 'info', 'die', 'whitePlate'],
+    diecut: ['notes', 'pdTarget', 'info', 'die', 'whitePlate', 'cameraMarks', 'cutterGuide'],
+    slitting: ['notes', 'pdTarget', 'info', 'die', 'whitePlate', 'slit', 'finishing'],
+    handtrim: ['notes', 'pdTarget', 'info', 'die', 'whitePlate', 'jobFinishing'],
+    breadbag: ['notes', 'pdTarget', 'info', 'die', 'whitePlate', 'jobFinishing', 'finishing'],
+    barcodes: ['fpoBarcode', 'barcode']
+};
+
+var custDefault = '';
 
 // returns bool
 function docIsOpen() {
@@ -44,46 +64,122 @@ function layerExists(layerName) {
     return false;
 }
 
-// add a single layer in correct position
+function numArr(num1, num2) {
+    //return array of numbers between num1 to num2, 
+    var arr = [];
+    var i;
+    for (i = num1 + 1; i < (num2); i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+function arrOfnames(array) {
+    var arr = [];
+    var i;
+    for (i = 0; i < array.length; i++) {
+        arr.push(array[i].name);
+    }
+    return arr;
+}
+
+function zipper(arr1, arr2) {
+    var i, longArr, shortArr, newArr, j;
+    if (arr1.length < arr2.length) {
+        shortArr = arr1;
+        newArr = arr2;
+        j = 0;
+    } else {
+        shortArr = arr2;
+        newArr = arr1;
+        j = 1;
+    }
+    for (i = 0; i < shortArr.length; i++) {
+        newArr.splice(j, 0, shortArr[i]);
+        j += 2;
+    }
+    return newArr;
+}
+
+function saveLyrState(layerRef) {
+    return [layerRef.visible, layerRef.locked];
+}
+
+function setLyrState(layerRef, settings) {
+    layerRef.visible = settings[0];
+    layerRef.locked = settings[1];
+}
+
 function addLayer(layerID) {
     var doc = app.activeDocument;
+    var curLayer = doc.activeLayer;
     var thisLayer = ll[layerID];
+    var curLyrs = ',' + arrOfnames(doc.layers).join(',');
+    if (curLyrs.indexOf(',' + ll.fullName(thisLayer.index, '')) !== -1) {return; }
+    var add = '';
+    if (layerID === 'mask') {
+        add = prompt("Mask for Page: ", "", "|) Layers - Add Mask Layer");
+        if (add === null) {return; } // cancel
+        if (add === '') {return; }
+    }
+    
+    if (layerID === 'custom') {
+        add = prompt("Enter Custom Layer Name: ", custDefault, "|) Layers - Add Custom Layer");
+        if (add === null) {return; } // cancel
+        if (add === '') {return; }
+    }
+    
     var newLayer = doc.layers.add();
-    newLayer.name = thisLayer.name + suffix;
+    newLayer.name = ll.fullName(thisLayer.index, add);
     newLayer.printable = thisLayer.print;
     
-    if (thisLayer.hasOwnProperty('position')) {
-        //move to position defined by position prop
-        newLayer.move(doc, thisLayer.position);
+    var i, post = [], pre = [], thisName;
+    if (thisLayer.hasOwnProperty('post')) {
+        post = thisLayer.post.length === 0 ? numArr(-1, thisLayer.index).reverse() : thisLayer.post;
     }
-    //move to position in doc, by index defined in layerList
-    var thisInd = thisLayer.index;
-    var i;
-    for (i = 0; i < ll.index.length; i++) {
-        if (layerExists(ll.index[thisInd - i])) {
+    if (thisLayer.hasOwnProperty('pre')) {
+        pre = thisLayer.pre.length === 0 ? numArr(thisLayer.index, ll.index.length) : thisLayer.pre;
+    }
+    var refLayers = zipper(pre, post);
+    var placement, refLayer, refState;
+    for (i = 0; i < refLayers.length; i++) {
+        thisName = ll.fullName(refLayers[i], '');
+        if (curLyrs.indexOf(thisName) !== -1) {
+            placement = refLayers[i] < thisLayer.index ? ElementPlacement.PLACEAFTER : ElementPlacement.PLACEBEFORE;
+            refLayer = doc.layers.getByName(thisName);
+            refState = saveLyrState(refLayer);
+            setLyrState(refLayer, [true, false]);
+            newLayer.move(refLayer, placement);
+            setLyrState(refLayer, refState);
+            return;
         }
-    //newLayer.move(rel, )
+    }
+    if (thisLayer.hasOwnProperty('pos')) {
+        newLayer.move(doc, thisLayer.pos);
+    } else {
+        refState = saveLyrState(curLayer);
+        setLyrState(curLayer, [true, false]);
+        newLayer.move(curLayer, ElementPlacement.PLACEBEFORE);
+        setLyrState(curLayer, refState);
     }
 }
 
-// add a set of layers
-function addLayers(layerSet) {
-    
+// add a single layer or a set of layers
+function addLayers(layerID, isSet) {
+    if (isSet) {
+        var thisSet = sets[layerID];
+        var i;
+        for (i = 0; i < thisSet.length; i++) {
+            addLayer(thisSet[i]);
+        }
+    } else {
+        addLayer(layerID);
+    }
 }
 
 function addCustom(name, printing) {
     
 }
-
-
-
-
-
-
-
-
-
-
 
 function remLayers(layer) {
     layer.locked = false;

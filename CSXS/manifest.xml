@@ -38,8 +38,8 @@
                             <Width>80</Width>
                         </MinSize>
                         <MaxSize>
-                            <Height>540</Height>
-                            <Width>512</Width>
+                            <Height>560</Height>
+                            <Width>1024</Width>
                         </MaxSize>
 					</Geometry>
 					<Icons>

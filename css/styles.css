@@ -14,7 +14,7 @@
 }
 
 .squareBtns {
-    line-height: 34px !important;
+    line-height: 25px !important;
     word-spacing: -2px;
 }
 
@@ -47,8 +47,8 @@ by the settings of the CC application
 .hostElt{}
 
 button {
-    height: 32px;
-    width: 32px;
+    height: 25px;
+    width: 24px;
     padding: 0 !important;
     display: inline-block;
     text-align: center;
