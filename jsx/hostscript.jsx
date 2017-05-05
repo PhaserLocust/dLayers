@@ -18,7 +18,7 @@ var ll = {
     cameraMarks: {index: 9, name: 'Camera Marks', post: [], pre: [10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
     cutterGuide: {index: 10, name: 'Cutter Guide', post: [], pre: [11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
     finishing: {index: 11, name: 'Finishing Marks', post: [], pre: [12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    jobFinishing: {index: 12, name: 'Job Finishing Marks', post: [], pre: [13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    jobFinishing: {index: 12, name: 'Job Marks', post: [], pre: [13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
     fill: {index: 13, name: 'Fill', print: true,  post: [], pos: ElementPlacement.PLACEATBEGINNING},
     hiddenArt: {index: 14, name: 'Hidden Art', post: [], pre: [15, 16, 17], print: false},
     fpoBarcode: {index: 15, name: 'FPO Barcode',  post: [14], pre: [16, 17], print: false},
@@ -116,15 +116,14 @@ function addLayer(layerID) {
     var thisLayer = ll[layerID];
     var curLyrs = ',' + arrOfnames(doc.layers).join(',');
     if (curLyrs.indexOf(',' + ll.fullName(thisLayer.index, '')) !== -1) {return; }
+    
     var add = '';
     if (layerID === 'mask') {
-        add = prompt("Mask for Page: ", "", "|) Layers - Add Mask Layer");
+        add = prompt("|) Layers - Add Mask Layer\n\nMask for Page: ", "");
         if (add === null) {return; } // cancel
         if (add === '') {return; }
-    }
-    
-    if (layerID === 'custom') {
-        add = prompt("Enter Custom Layer Name: ", custDefault, "|) Layers - Add Custom Layer");
+    } else if (layerID === 'custom') {
+        add = prompt("|) Layers - Add Custom Layer\n\nEnter Custom Layer Name: ", custDefault);
         if (add === null) {return; } // cancel
         if (add === '') {return; }
     }
@@ -178,7 +177,7 @@ function addLayers(layerID, isSet) {
 }
 
 function addCustom(name, printing) {
-    
+    //for use of extra extension window for ui
 }
 
 function remLayers(layer) {
@@ -194,22 +193,60 @@ function remLayers(layer) {
         //delete if layer is empty
         if (subLayer.pageItems.length === 0) {
             subLayer.remove();
-            return;
+            //if (i === 0) {return;}
+        } else {
+            //new group at level of layer
+            var group = layer.groupItems.add();
+            //rename group to layername
+            group.name = subLayer.name;
+            //move group above layer
+            group.move(subLayer, ElementPlacement.PLACEBEFORE);
+            //move contents of layer to new group
+            for (j = subLayer.pageItems.length - 1; j >= 0; j--) {
+                subLayer.pageItems[j].move(group, ElementPlacement.PLACEATBEGINNING);
+            }
+            //delete sublayer
+            subLayer.remove();
         }
-        //new group at level of layer
-        var group = layer.groupItems.add();
-        //rename group to layername
-        group.name = subLayer.name;
-        //move group above layer
-        group.move(subLayer, ElementPlacement.PLACEBEFORE);
-        //move contents of layer to new group
-        for (j = subLayer.pageItems.length - 1; j >= 0; j--) {
-            subLayer.pageItems[j].move(group, ElementPlacement.PLACEATBEGINNING);
-        }
-        //delete sublayer
-        subLayer.remove();
     }
 }
+
+
+function findSublayers() {
+    var doc = app.activeDocument;
+    var guilty = []; //array of layers with sublayers
+    var i;
+    //find layers with sublayers
+    for (i = 0; i < doc.layers.length; i++) {
+        if (doc.layers[i].layers.length > 0) {
+            guilty.push(doc.layers[i])
+        }
+    }
+    //display results
+    if (guilty.length === 0) {
+        alert("|) Layers - Find Sublayers\n\nNo sublayers were found.");
+        return;
+    }
+    var mes = "Remove sublayers from these layers?";
+    for (i = 0; i < guilty.length; i++) {
+        mes += '\n     ' + guilty[i].name;
+    }
+    
+    var verdict = confirm("|) Layers - Find Sublayers\n\n" + mes);
+    if (verdict === false) {
+        return; 
+    } else {
+        for (i = 0; i < guilty.length; i++) {
+            
+            //unlock, show layer?????????
+            
+            
+            
+            remLayers(guilty[i]);
+        }
+    }
+}
+
 
 function removeSublayers() {
     // recursive script to remove all sublayers from active layer

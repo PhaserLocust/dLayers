@@ -65,8 +65,11 @@ $(document).ready(function () {
     //////////////////////////////////
     
     $('#remSublayers').click(function () {
-        console.log(Date() + ' remSublayers');
         csInterface.evalScript('removeSublayers()');
+    });
+    
+    $('#findSublayers').click(function () {
+        csInterface.evalScript('findSublayers()');
     });
     
     $('.topcoat-button', '#layersets').hover(
