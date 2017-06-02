@@ -49,6 +49,7 @@ $(document).ready(function () {
             });
             return;
         } else {
+            // disable if no doc open
             name = $(event.data).find("name").text();
             setEnabled(name);
         }
