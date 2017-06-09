@@ -71,8 +71,26 @@ img.layerset {
     line-height: 12px !important;
 }
 
-.third.adj {
-    line-height: 14px !important;
+.barThird {
+    width: 76px;
+    height: 18px;
+    display: inline !important;
+}
+
+.barSm {
+    width: 19px;
+    height: 18px;
+    line-height: 12px !important;
+    text-align: right !important;
+    padding-left: 3px !important;
+}
+
+.barLg {
+    width: 58px;
+    height: 18px;
+    line-height: 12px !important;
+    text-align: left !important;
+    padding-left: 3px !important;
 }
 
 .fourth {

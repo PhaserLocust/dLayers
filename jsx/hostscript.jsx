@@ -5,25 +5,25 @@
 // ll(layerList) object contains objects describing layers to be created
 // key name corresponds to button id in html, index is array with desired layer order
 var ll = {
-    index: ['notes', 'mask', 'pdTarget', 'info', 'die', 'dieInfo', 'slit', 'whitePlate', 'mattePlate', 'cameraMarks', 'cutterGuide', 'finishing', 'jobFinishing', 'fill', 'hiddenArt', 'barcode', 'fpoBarcode', 'salesSample', 'whiteBacking', 'substrate', 'custom'],
+    index: ['notes', 'mask', 'pdTarget', 'info', 'die', 'dieInfo', 'slit', 'whitePlate', 'mattePlate', 'cameraMarks', 'cutterGuide', 'finishing', 'jobFinishing', 'fill', 'salesSample', 'barcode', 'fpoBarcode', 'hiddenArt', 'whiteBacking', 'substrate', 'custom'],
     notes: {index: 0, name: 'Notes', print: false, pos: ElementPlacement.PLACEATBEGINNING},
-    mask: {index: 1, name: 'Mask for Page:', post: [0], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    pdTarget: {index: 2, name: 'PD Target', post: [], pre: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    info: {index: 3, name: 'Info', print: true, post: [], pre: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
-    die: {index: 4, name: 'Die', print: true, post: [], pre: [5, 6, 7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
-    dieInfo: {index: 5, name: 'Die Info', print: true, post: [], pre: [6, 7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
-    slit: {index: 6, name: 'Slit', print: true, post: [], pre: [7, 8, 9, 10, 11, 12, 13], pos: ElementPlacement.PLACEATBEGINNING},
-    whitePlate: {index: 7, name: 'White Plate', post: [], pre: [8, 9, 10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    mattePlate: {index: 8, name: 'Matte Plate', post: [], pre: [9, 10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    cameraMarks: {index: 9, name: 'Camera Marks', post: [], pre: [10, 11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    cutterGuide: {index: 10, name: 'Cutter Guide', post: [], pre: [11, 12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    finishing: {index: 11, name: 'Finishing Marks', post: [], pre: [12, 13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    jobFinishing: {index: 12, name: 'Job Finishing Marks', post: [], pre: [13], print: true, pos: ElementPlacement.PLACEATBEGINNING},
-    fill: {index: 13, name: 'Fill', print: true,  post: [], pos: ElementPlacement.PLACEATBEGINNING},
-    hiddenArt: {index: 14, name: 'Hidden Art', post: [], pre: [15, 16, 17], print: false},
-    barcode: {index: 15, name: 'Barcode',  post: [15, 14], pre: [17], print: true},
-    fpoBarcode: {index: 16, name: 'FPO Barcode',  post: [14], pre: [16, 17], print: false},
-    salesSample: {index: 17, name: 'Sales Sample',  post: [16, 15, 14], print: true},
+    mask: {index: 1, name: 'Mask Page ', post: [0], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    pdTarget: {index: 2, name: 'PD Target', post: [], pre: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    info: {index: 3, name: 'Info', print: true, post: [], pre: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], pos: ElementPlacement.PLACEATBEGINNING},
+    die: {index: 4, name: 'Die', print: true, post: [], pre: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], pos: ElementPlacement.PLACEATBEGINNING},
+    dieInfo: {index: 5, name: 'Die Info', print: true, post: [], pre: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], pos: ElementPlacement.PLACEATBEGINNING},
+    slit: {index: 6, name: 'Slit', print: true, post: [], pre: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16], pos: ElementPlacement.PLACEATBEGINNING},
+    whitePlate: {index: 7, name: 'White Plate', post: [], pre: [8, 9, 10, 11, 12, 13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    mattePlate: {index: 8, name: 'Matte Plate', post: [], pre: [9, 10, 11, 12, 13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    cameraMarks: {index: 9, name: 'Camera Marks', post: [], pre: [10, 11, 12, 13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    cutterGuide: {index: 10, name: 'Cutter Guide', post: [], pre: [11, 12, 13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    finishing: {index: 11, name: 'Finishing Marks', post: [], pre: [12, 13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    jobFinishing: {index: 12, name: 'Job Finishing Marks', post: [], pre: [13, 14, 15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    fill: {index: 13, name: 'Fill',  post: [], pre: [14, 15, 16, 17], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    salesSample: {index: 14, name: 'Sales Sample',  post: [], pre: [15, 16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    barcode: {index: 15, name: 'Barcode',  post: [], pre: [16], print: true, pos: ElementPlacement.PLACEATBEGINNING},
+    fpoBarcode: {index: 16, name: 'FPO Barcode',  post: [], print: false, pos: ElementPlacement.PLACEATBEGINNING},
+    hiddenArt: {index: 17, name: 'Hidden Art', post: [], print: false},
     whiteBacking: {index: 18, name: 'White Backing', pre: [19], print: true, pos: ElementPlacement.PLACEATEND},
     substrate: {index: 19, name: 'Substrate', print: true,  post: [18], pos: ElementPlacement.PLACEATEND},
     custom: {index: 20, name: '', print: true},
@@ -34,6 +34,16 @@ var ll = {
         } else {
             return this[this.index[ind]].name + ' - CL&D Digital';
         }
+    },
+    toggle: function (ind, vis, print) {
+        var doc = app.activeDocument;
+        var name = this.fullName(ind, '');
+        if (layerExists(name)) {
+            var thisLayer = doc.layers.getByName(name);
+            thisLayer.locked = false;
+            thisLayer.visible = vis;
+            thisLayer.printable = print;
+        } 
     }
 };
 
@@ -75,6 +85,7 @@ function numArr(num1, num2) {
 }
 
 function arrOfnames(array) {
+    // returns array of the .name values of the items in given array
     var arr = [];
     var i;
     for (i = 0; i < array.length; i++) {
@@ -177,9 +188,89 @@ function addLayers(layerID, isSet) {
 }
 
 function addCustom(name, printing) {
-    //for use of extra extension window for ui
+    // for future use of extra extension window for ui
+    // allows more user input in confirmation window(ie layer name and visible checkbox)
 }
 
+///////////////////////
+
+// possible layerViews, same as id values in index.html
+
+
+// ll index, visable & printable value of each standard layer in layerView
+var viewList = [
+    [[0, 1, 0], []],
+    
+    [],
+    
+    [],
+    
+    [[0,1,0], [2,1,1], [3,0,0], [4,0,0], [6,1,1], [7,1,1], [8,0,0], [9,1,1], [10,1,1], [11,1,1], [12,1,1], [13,1,1], [19,0,0]],
+    
+    [],
+    
+    []
+];
+
+function showAllObj() {
+ 
+ }
+
+// hides all layers in doc
+function hideAllLayers() {
+    var doc = app.activeDocument;
+    var i;
+    for (i = 0; i < doc.layers.length; i++) {
+        doc.layer[i].visible = false;
+    }
+}
+
+// shows all layers set to print in doc, hides others
+function showPrintLayers() {
+    var doc = app.activeDocument;
+    var i;
+    for (i = 0; i < doc.layers.length; i++) {
+        if (doc.layer[i].printable = true;) {
+            doc.layer[i].locked = false;
+            doc.layer[i].visible = true;
+        } else {
+            doc.layer[i].visible = false;
+        }     
+    }
+}
+
+function activateMatchedArtboard(boardName) {
+    
+}
+
+function applyView(viewIndex) {
+    
+    // show all printing layers
+    
+    // hide all layers
+    
+    // set standard layers:
+    var list = viewList[viewIndex]; 
+    var i;
+    for (i = 0; i < list.length; i++) {
+        ll.toggle(list[i][0], list[i][1], list[i][2]);
+    }
+    
+    // set mask layers:
+    
+    //show all art on now-visible layers
+    
+    // handle matte/white proof art
+    
+    // set artboard
+    
+    // deselect all
+    app.activeDocument.selection = null;
+}
+
+///////////////////////
+
+// recursive script to remove all sublayers from given layer
 function remLayers(layer) {
     layer.locked = false;
     var layerCount = layer.layers.length;
@@ -210,6 +301,20 @@ function remLayers(layer) {
         }
     }
 }
+
+function subLayersExist() {
+    //returns bool as string
+    var doc = app.activeDocument;
+    var i;
+    //find layers with sublayers
+    for (i = 0; i < doc.layers.length; i++) {
+        if (doc.layers[i].layers.length > 0) {
+            return 'true';
+        }
+    }
+    return 'false';
+}
+
 
 function findSublayers() {
     var doc = app.activeDocument;
@@ -243,7 +348,8 @@ function findSublayers() {
 
 
 function removeSublayers() {
-    // recursive script to remove all sublayers from active layer
     var layer = app.activeDocument.activeLayer;
     remLayers(layer);
 }
+
+//applyView ('');

@@ -1,5 +1,5 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
-/*global $, window, location, CSInterface, SystemPath, themeManager*/
+/*global $, window, location, CSInterface, CSEvent, SystemPath, themeManager*/
 
 $(document).ready(function () {
 	'use strict';
@@ -27,31 +27,52 @@ $(document).ready(function () {
         // disables ui if passed ''
         if (name === '') {
             $('button').prop('disabled', true);
-            $("#controls").addClass("disabled");
+            ////$("#controls").addClass("disabled");
             $("hr").addClass("disabled");
             return;
         }
         $('button').prop('disabled', false);
-        $("#controls").removeClass("disabled");
+        ////$("#controls").removeClass("disabled");
         $("hr").removeClass("disabled");
+    }
+    
+    function setFindSubButtonArt() {
+        // console.log("check for sublayers");
+        csInterface.evalScript('subLayersExist()', function (res) {
+            // set art accordingly
+            if (res === 'true') {
+                // console.log("found subs, set art");
+                $('#findSubImg').attr('src', 'img/btnIcon_findSubTrue.png');
+            } else if (res === 'false') {
+                // console.log("no subs, set art");
+                $('#findSubImg').attr('src', 'img/btnIcon_findSub.png');
+            }
+        });
     }
 
     function onDocActivated(event) {
         var name;
         if (event === '') {
+            // called by $(window).load
             csInterface.evalScript('docIsOpen()', function (res) {
-                console.log("the result: " + res);
+                // console.log("the result: " + res);
                 if (res === 'true') {
                     setEnabled('enable');
+                    setFindSubButtonArt();
                 } else {
                     setEnabled('');
                 }
             });
             return;
         } else {
-            // disable if no doc open
+            // check, disable if no doc open
             name = $(event.data).find("name").text();
             setEnabled(name);
+            
+            // if doc open, check for sublayers to update findSublayers button
+            if (name !== '') {
+                setFindSubButtonArt();
+            }
         }
     }
     
@@ -67,10 +88,12 @@ $(document).ready(function () {
     
     $('#remSublayers').click(function () {
         csInterface.evalScript('removeSublayers()');
+        setFindSubButtonArt();
     });
     
     $('#findSublayers').click(function () {
         csInterface.evalScript('findSublayers()');
+        setFindSubButtonArt();
     });
     
     $('.topcoat-button', '#layersets').hover(
@@ -86,14 +109,39 @@ $(document).ready(function () {
     
     $('.topcoat-button', '#layersets').click(
         function () {
-            var theId = '.' + this.id;
             csInterface.evalScript('addLayers("' + this.id + '", true)');
         }
     );
     
-    $('.topcoat-button--quiet', '#rectBtns').click(
+    $('.add', '#rectBtns').click(
         function () {
             csInterface.evalScript('addLayers("' + this.id + '", false)');
+        }
+    );
+    
+    $('#substrateArt').click(
+        function () {
+            // make sure layer exists:
+            csInterface.evalScript('addLayers("substrate", false)');
+            // create event telling .marks extension to please build art
+            var event = new CSEvent("com.rps.dlayers", "APPLICATION");
+            event.data = "substrateArt";
+            csInterface.dispatchEvent(event);
+        }
+    );
+    
+    // passes index of id in list to jsx
+    $('.topcoat-button', '#layerViews').click(
+        function () {
+            var viewNames = [
+                'pdfView',
+                'whiteView',
+                'matteView',
+                'jobView',
+                'pdView',
+                'cldView'
+            ];
+            csInterface.evalScript('applyView("' + viewNames.indexOf(this.id) + '")');
         }
     );
     

@@ -30,16 +30,16 @@
 					<Menu>|) Layers</Menu>
 					<Geometry>
 						<Size>
-							<Height>58</Height>
-							<Width>240</Width>
+							<Height>138</Height>
+							<Width>468</Width>
 						</Size>
                         <MinSize>
-                            <Height>58</Height>
+                            <Height>138</Height>
                             <Width>80</Width>
                         </MinSize>
                         <MaxSize>
-                            <Height>600</Height>
-                            <Width>1024</Width>
+                            <Height>576</Height>
+                            <Width>468</Width>
                         </MaxSize>
 					</Geometry>
 					<Icons>

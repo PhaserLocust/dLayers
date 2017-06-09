@@ -11,27 +11,30 @@
 <body class="hostElt">
     <div id="content"> 
         <div id="rectBtns">
-            <button id="custom" class="topcoat-button--quiet third" disabled="true">Custom…</button>
-            <button id="notes" class="topcoat-button--quiet third ital basic diecut slitting breadbag handtrim" disabled="true">Notes</button>
-            <button id="mask" class="topcoat-button--quiet third" disabled="true">Mask…</button>
-            <button id="pdTarget" class="topcoat-button--quiet third basic diecut slitting breadbag handtrim" disabled="true">PD Target</button>
-            <button id="info" class="topcoat-button--quiet third basic diecut slitting breadbag handtrim" disabled="true">Info</button>
-            <button id="die" class="topcoat-button--quiet third basic diecut slitting breadbag handtrim" disabled="true">Die</button>
-            <button id="dieInfo" class="topcoat-button--quiet third" disabled="true">Die Info</button>
-            <button id="slit" class="topcoat-button--quiet third slitting" disabled="true">Slit</button>
-            <button id="whitePlate" class="topcoat-button--quiet third basic diecut slitting breadbag handtrim" disabled="true">White Plate</button>
-            <button id="mattePlate" class="topcoat-button--quiet third" disabled="true">Matte Plate</button>
-            <button id="cameraMarks" class="topcoat-button--quiet third diecut" disabled="true">Camera Marks</button>
-            <button id="cutterGuide" class="topcoat-button--quiet third diecut" disabled="true">Cutter Guide</button>
-            <button id="finishing" class="topcoat-button--quiet third slitting breadbag" disabled="true">Finish Marks</button>
-            <button id="jobFinishing" class="topcoat-button--quiet third breadbag handtrim" disabled="true">Job Marks</button>
-            <button id="fill" class="topcoat-button--quiet third" disabled="true">Fill</button>
-            <button id="hiddenArt" class="topcoat-button--quiet third ital" disabled="true">Hidden Art</button>
-            <button id="fpoBarcode" class="topcoat-button--quiet third ital barcodes" disabled="true">FPO Barcode</button>
-            <button id="barcode" class="topcoat-button--quiet third barcodes" disabled="true">Barcode</button>
-            <button id="salesSample" class="topcoat-button--quiet third" disabled="true">Sales Sample</button>
-            <button id="whiteBacking" class="topcoat-button--quiet third" disabled="true">White Backing</button>
-            <button id="substrate" class="topcoat-button--quiet third" disabled="true">Substrate</button>    
+            <button id="custom" class="topcoat-button--quiet add third" disabled="true">Custom…</button>
+            <button id="notes" class="topcoat-button--quiet add third ital basic diecut slitting breadbag handtrim" disabled="true">Notes</button>
+            <button id="mask" class="topcoat-button--quiet add third" disabled="true">Mask…</button>
+            <button id="pdTarget" class="topcoat-button--quiet add third basic diecut slitting breadbag handtrim" disabled="true">PD Target</button>
+            <button id="info" class="topcoat-button--quiet add third basic diecut slitting breadbag handtrim" disabled="true">Info</button>
+            <button id="die" class="topcoat-button--quiet add third basic diecut slitting breadbag handtrim" disabled="true">Die</button>
+            <button id="dieInfo" class="topcoat-button--quiet add third" disabled="true">Die Info</button>
+            <button id="slit" class="topcoat-button--quiet add third slitting" disabled="true">Slit</button>
+            <button id="whitePlate" class="topcoat-button--quiet add third basic diecut slitting breadbag handtrim" disabled="true">White Plate</button>
+            <button id="mattePlate" class="topcoat-button--quiet add third" disabled="true">Matte Plate</button>
+            <button id="cameraMarks" class="topcoat-button--quiet add third diecut" disabled="true">Camera Marks</button>
+            <button id="cutterGuide" class="topcoat-button--quiet add third diecut" disabled="true">Cutter Guide</button>
+            <button id="finishing" class="topcoat-button--quiet add third slitting breadbag" disabled="true">Finish Marks</button>
+            <button id="jobFinishing" class="topcoat-button--quiet add third breadbag handtrim" disabled="true">Job Marks</button>
+            <button id="fill" class="topcoat-button--quiet add third" disabled="true">Fill</button>
+            <button id="salesSample" class="topcoat-button--quiet add third" disabled="true">Sales Sample</button>
+            <button id="barcode" class="topcoat-button--quiet add third barcodes" disabled="true">Barcode</button>
+            <button id="fpoBarcode" class="topcoat-button--quiet add third ital barcodes" disabled="true">FPO Barcode</button>
+            <button id="hiddenArt" class="topcoat-button--quiet add third ital" disabled="true">Hidden Art</button>
+            <button id="whiteBacking" class="topcoat-button--quiet add third" disabled="true">White Backing</button>
+            <span class="topcoat-button-bar barThird">
+                <button id="substrateArt" class="topcoat-button--quiet barSm" disabled="true"><img src="img/btnIcon_substrateArt.png" alt="substrate art"></button>
+                <button id="substrate" class="topcoat-button--quiet add barLg" disabled="true">Substrate</button>
+            </span>
             <div id="layersets">
                 <button id="basic" class="topcoat-button third" disabled="true">
                     <img class="layerset" src="img/btnIcon_layerSet.png" alt="layerset">Basic</button>
@@ -39,7 +42,7 @@
                     <img class="layerset" src="img/btnIcon_layerSet.png" alt="layerset">Die Cut</button>
                 <button id="slitting" class="topcoat-button third" disabled="true">
                     <img class="layerset" src="img/btnIcon_layerSet.png" alt="layerset">Slitting</button>
-                <button id="handtrim" class="topcoat-button third adj" disabled="true">
+                <button id="handtrim" class="topcoat-button third" disabled="true">
                     <img class="layerset" src="img/btnIcon_layerSet.png" alt="layerset">Hand Trim</button>
                 <button id="breadbag" class="topcoat-button third" disabled="true">
                     <img class="layerset" src="img/btnIcon_layerSet.png" alt="layerset">Bread Bag</button>
@@ -48,23 +51,23 @@
             </div>
         </div>
         
-        <div class="squareBtns">
-            <button class="topcoat-button" disabled="true">
+        <div id="layerViews" class="squareBtns">
+            <button id="pdfView" class="topcoat-button" disabled="true">
                 <img class="square" src="img/SButton_LV_PDF.png" alt="PDF"></button>
-            <button id="mask" class="topcoat-button" disabled="true">
+            <button id="whiteView" class="topcoat-button" disabled="true">
                 <img class="square" src="img/SButton_LV_WT.png" alt="White Plate"></button>
-            <button id="custom" class="topcoat-button" disabled="true">
+            <button id="matteView" class="topcoat-button" disabled="true">
                 <img class="square" src="img/SButton_LV_MT.png" alt="Matte Plate"></button>
-            <button id="substrate" class="topcoat-button" disabled="true">
+            <button id="jobView" class="topcoat-button" disabled="true">
                 <img class="square" src="img/SButton_LV_JOB.png" alt="Job"></button>
-            <button id="substrate" class="topcoat-button" disabled="true">
+            <button id="pdView" class="topcoat-button" disabled="true">
                 <img class="square" src="img/SButton_LV_PD.png" alt="Press Director"></button>
-            <button id="substrate" class="topcoat-button" disabled="true">
+            <button id="cldView" class="topcoat-button" disabled="true">
                 <img class="square" src="img/SButton_LV_CLD.png" alt="CL&D"></button>
         </div>
         
         <div>
-            <button id="findSublayers" class="topcoat-button third" disabled="true"><img class="layerset" src="img/btnIcon_findSub.png" alt="Find Sublayers">Sublayers</button>
+            <button id="findSublayers" class="topcoat-button third" disabled="true"><img id="findSubImg" class="layerset" src="img/btnIcon_findSub.png" alt="Find Sublayers">Sublayers</button>
             <button id="remSublayers" class="topcoat-button third" disabled="true"><img class="layerset" src="img/btnIcon_remSub.png" alt="Remove Sublayers">Sublayers</button>
         </div>
     </div>
