@@ -35,15 +35,15 @@ var ll = {
             return this[this.index[ind]].name + ' - CL&D Digital';
         }
     },
-    toggle: function (ind, vis, print) {
+    toggle: function (ind, vis, print, lock) {
         var doc = app.activeDocument;
         var name = this.fullName(ind, '');
         if (layerExists(name)) {
             var thisLayer = doc.layers.getByName(name);
-            thisLayer.locked = false;
+            thisLayer.locked = lock;
             thisLayer.visible = vis;
             thisLayer.printable = print;
-        } 
+        }
     }
 };
 
@@ -194,27 +194,21 @@ function addCustom(name, printing) {
 
 ///////////////////////
 
-// possible layerViews, same as id values in index.html
-
-
-// ll index, visable & printable value of each standard layer in layerView
+// ll index, visable, printable, locked value of each standard layer in the layerView
+// in order: pdf, white, matte, job, pd, cld
 var viewList = [
-    [[0, 1, 0], []],
+    [[0, 0, 0, 0], [2, 0, 1, 0], [3, 1, 1, 0], [4, 1, 1, 0], [6, 0, 1, 0], [7, 0, 1, 0], [8, 0, 1, 0], [9, 0, 1, 0], [10, 0, 1, 0], [11, 1, 1, 0], [12, 0, 1, 0], [13, 0, 1, 0], [19, 1, 1, 0]],
     
-    [],
+    [[3, 1, 1, 0], [4, 1, 1, 0], [7, 1, 1, 0], [11, 1, 1, 0]],
     
-    [],
+    [[3, 1, 1, 0], [4, 1, 1, 0], [8, 1, 1, 0], [11, 1, 1, 0]],
     
-    [[0,1,0], [2,1,1], [3,0,0], [4,0,0], [6,1,1], [7,1,1], [8,0,0], [9,1,1], [10,1,1], [11,1,1], [12,1,1], [13,1,1], [19,0,0]],
+    [[0, 1, 0, 1], [2, 1, 1, 1], [3, 0, 0, 0], [4, 0, 0, 0], [6, 1, 1, 0], [7, 1, 1, 0], [8, 0, 0, 0], [9, 1, 1, 0], [10, 1, 1, 0], [11, 1, 1, 0], [12, 1, 1, 0], [13, 1, 1, 0], [19, 0, 0, 0]],
     
-    [],
+    [[2, 1, 1, 0], [6, 1, 1, 0], [12, 1, 1, 0]],
     
-    []
+    [[0, 1, 0, 0], [2, 1, 1, 0], [3, 1, 1, 0], [4, 1, 1, 0], [6, 1, 1, 0], [7, 1, 1, 0], [8, 1, 1, 0], [9, 1, 1, 0], [10, 1, 1, 0], [11, 1, 1, 0], [12, 1, 1, 0], [13, 1, 1, 0], [14, 1, 1, 0], [15, 1, 1, 0], [18, 1, 1, 0], [19, 0, 0, 0]]
 ];
-
-function showAllObj() {
- 
- }
 
 // hides all layers in doc
 function hideAllLayers() {
@@ -230,40 +224,120 @@ function showPrintLayers() {
     var doc = app.activeDocument;
     var i;
     for (i = 0; i < doc.layers.length; i++) {
-        if (doc.layer[i].printable = true;) {
+        if (doc.layer[i].printable === true) {
             doc.layer[i].locked = false;
             doc.layer[i].visible = true;
         } else {
             doc.layer[i].visible = false;
-        }     
+        }
     }
 }
 
-function activateMatchedArtboard(boardName) {
-    
+// find all layers that match reg ex and set properties
+function matchToggleLayers(reg, vis, print, lock) {
+    var doc = app.activeDocument;
+    var i, thisLayer;
+    for (i = 0; i < doc.layers.length; i++) {
+        thisLayer = doc.layer[i];
+        if (reg.test(thisLayer.name)) {
+            thisLayer.locked = lock;
+            thisLayer.visible = vis;
+            thisLayer.printable = print;
+        }
+    }
+}
+
+function activateMatchedArtboard(stringMatch1, stringMatch2, exactMatchBool) {
+    // string search is not case sensitive
+    var artBoards = app.activeDocument.artboards;
+    var thisArtBoardName;
+    var i;
+    if (exactMatchBool) {
+        for (i = 0; i < artBoards.length; i++) {
+            thisArtBoardName = artBoards[i].name.toUpperCase();
+            if (thisArtBoardName === stringMatch1) {
+                artBoards.setActiveArtboardIndex(i);
+                break;
+            } else if (thisArtBoardName === stringMatch2) {
+                artBoards.setActiveArtboardIndex(i);
+                break;
+            }
+        }
+    } else {
+        for (i = 0; i < artBoards.length; i++) {
+            thisArtBoardName = artBoards[i].name.toUpperCase();
+            if (thisArtBoardName.indexOf(" & quoted form of stringToMatch & ".toUpperCase()) !== -1) {
+                artBoards.setActiveArtboardIndex(i);
+                break;
+            } else if (thisArtBoardName.indexOf(" & quoted form of secondStringToMatch & ".toUpperCase()) !== -1) {
+                artBoards.setActiveArtboardIndex(i);
+                break;
+            }
+        }
+    }
 }
 
 function applyView(viewIndex) {
-    
-    // show all printing layers
-    
-    // hide all layers
-    
+    if (viewIndex === 0 || viewIndex === 3) {
+        showPrintLayers();
+    } else {
+        hideAllLayers();
+    }
+
     // set standard layers:
-    var list = viewList[viewIndex]; 
+    var list = viewList[viewIndex];
     var i;
     for (i = 0; i < list.length; i++) {
         ll.toggle(list[i][0], list[i][1], list[i][2]);
     }
     
-    // set mask layers:
+    // items set case by case basis:
+        // pd layer
+        // mask layers
+        // what to do with matte/white proof art
+        // artboard to activate
+    var str1 = 'PDF';
+    var str2 = 'NO MATCH';
+    var exact = false;
+    switch (viewIndex) {
+    case '0':
+        matchToggleLayers(/Mask Page.*- CL&D Digital/, 0, 1, 0);
+        break;
+    case '1':
+        matchToggleLayers(/^PD-.{4}-.*-.* - CL&D Digital/, 1, 1, 0);
+        matchToggleLayers(/Mask Page.*- CL&D Digital/, 0, 1, 0);
+        break;
+    case '2':
+        matchToggleLayers(/^PD-.{4}-.*-.* - CL&D Digital/, 1, 1, 0);
+        matchToggleLayers(/Mask Page.*- CL&D Digital/, 0, 1, 0);
+        break;
+    case '3':
+        matchToggleLayers(/Mask Page.*- CL&D Digital/, 0, 1, 0);
+
+        str1 = 'JOB';
+        str2 = 'NO MATCH';
+        exact = false;
+        break;
+    case '4':
+        matchToggleLayers(/^PD-.{4}-.*-.* - CL&D Digital/, 1, 1, 0);
+        str1 = 'PD - DIE CUT';
+        str2 = 'PD';
+        exact = true;
+        break;
+    case '5':
+        str1 = 'JOB';
+        str2 = 'NO MATCH';
+        exact = false;
+        break;
+    }
     
     //show all art on now-visible layers
+    app.executeMenuCommand('showAll');
     
     // handle matte/white proof art
     
     // set artboard
-    
+    activateMatchedArtboard(str1, str2, exact);
     // deselect all
     app.activeDocument.selection = null;
 }
@@ -273,6 +347,7 @@ function applyView(viewIndex) {
 // recursive script to remove all sublayers from given layer
 function remLayers(layer) {
     layer.locked = false;
+    layer.visible = true;
     var layerCount = layer.layers.length;
     if (layerCount === 0) {
         return;
@@ -315,7 +390,6 @@ function subLayersExist() {
     return 'false';
 }
 
-
 function findSublayers() {
     var doc = app.activeDocument;
     var guilty = []; //array of layers with sublayers
@@ -323,7 +397,7 @@ function findSublayers() {
     //find layers with sublayers
     for (i = 0; i < doc.layers.length; i++) {
         if (doc.layers[i].layers.length > 0) {
-            guilty.push(doc.layers[i])
+            guilty.push(doc.layers[i]);
         }
     }
     //display results
@@ -338,7 +412,7 @@ function findSublayers() {
     
     var verdict = confirm("|) Layers - Find Sublayers\n\n" + mes);
     if (verdict === false) {
-        return; 
+        return;
     } else {
         for (i = 0; i < guilty.length; i++) {
             remLayers(guilty[i]);
@@ -346,10 +420,7 @@ function findSublayers() {
     }
 }
 
-
 function removeSublayers() {
     var layer = app.activeDocument.activeLayer;
     remLayers(layer);
 }
-
-//applyView ('');

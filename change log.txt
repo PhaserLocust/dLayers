@@ -2,9 +2,10 @@
 //    |) Layers Change Log    //
 ////////////////////////////////
 
-06/??/17 v1.1.0
+    + Layer Views added - delayed until database integration
+
+06/14/17 v2.0.0
     - Create Layers added, including create substrate art using |) Marks Extension
-    + Layer Views added
     - UI updated to match dMarks extension
     - Added Search for Sublayers to find and remove sublayers for entire doc
     - Remove Sublayers no longer exits after removing the first empty sublayer
