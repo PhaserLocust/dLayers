@@ -4,6 +4,12 @@
 
     + Layer Views added - delayed until database integration
 
+10/??/17 V2.1.0(1)
+		+ fix placement of Camera Marks layer
+		+ fix fail on adding layers when Die Info Layer exists (add space to end of name...)
+		+ fix or add warning for plugin item deletion in Remove Sublayers
+		+ fix for Remove Sublayers leaving empty groups when multiple(3+) Sublayers with same name exist
+
 06/14/17 v2.0.0
     - Create Layers added, including create substrate art using |) Marks Extension
     - UI updated to match dMarks extension
