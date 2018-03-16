@@ -1,6 +1,8 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
-/*global $, Folder, app, ElementPlacement*/
-'use strict';
+/*global $, app, ElementPlacement*/
+
+/* functions used in main.js with csInterface.evalScript() begin with 'eval' */
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "eval" }]*/
 
 // ll(layerList) object contains objects describing layers to be created
 // key name corresponds to button id in html, index is array with desired layer order
@@ -59,7 +61,7 @@ var sets = {
 var custDefault = '';
 
 // returns bool
-function docIsOpen() {
+function eval_docIsOpen() {
     return app.documents.length > 0 ? 'true' : 'false';
 }
 
@@ -95,7 +97,7 @@ function arrOfnames(array) {
 }
 
 function zipper(arr1, arr2) {
-    var i, longArr, shortArr, newArr, j;
+    var i, shortArr, newArr, j;
     if (arr1.length < arr2.length) {
         shortArr = arr1;
         newArr = arr2;
@@ -175,7 +177,7 @@ function addLayer(layerID) {
 }
 
 // add a single layer or a set of layers
-function addLayers(layerID, isSet) {
+function eval_addLayers(layerID, isSet) {
     if (isSet) {
         var thisSet = sets[layerID];
         var i;
@@ -277,7 +279,7 @@ function activateMatchedArtboard(stringMatch1, stringMatch2, exactMatchBool) {
     }
 }
 
-function applyView(viewIndex) {
+function eval_applyView(viewIndex) {
     if (viewIndex === 0 || viewIndex === 3) {
         showPrintLayers();
     } else {
@@ -377,7 +379,7 @@ function remLayers(layer) {
     }
 }
 
-function subLayersExist() {
+function eval_subLayersExist() {
     //returns bool as string
     var doc = app.activeDocument;
     var i;
@@ -390,7 +392,7 @@ function subLayersExist() {
     return 'false';
 }
 
-function findSublayers() {
+function eval_findSublayers() {
     var doc = app.activeDocument;
     var guilty = []; //array of layers with sublayers
     var i;
@@ -420,7 +422,7 @@ function findSublayers() {
     }
 }
 
-function removeSublayers() {
+function eval_removeSublayers() {
     var layer = app.activeDocument.activeLayer;
     remLayers(layer);
 }
